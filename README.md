@@ -25,7 +25,7 @@ Lägg till en UserService och en MessageService med metoder för Get och Post
 Gör det nedan med hårdkodade listor i servicarna till att börja med (registrera servicarna som Singleton).
 Injecta dessa i respektive vy efter att du skapat dem.
 
-1. Skapa en vy för vardera endpoint-grupp
+1. Skapa en vy för vardera endpoint-**grupp** (Inte en för varje endpoint, alltså en UserView och en MessageView )
 2. User-vyn ska ha ett formulär för att lägga till en user
 3. Message-Vyn ska ha ett formulär för att skicka meddelanden
    1. Message-vyn ska också kunna visa alla messages
