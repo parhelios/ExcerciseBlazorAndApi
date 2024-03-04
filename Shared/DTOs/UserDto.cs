@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace Shared.DTOs;
+﻿namespace Shared.DTOs;
 
 public class UserDto
 {

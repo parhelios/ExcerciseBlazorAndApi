@@ -1,8 +1,6 @@
-﻿using Amazon.Runtime.Internal;
-using DataAccess.Interfaces;
+﻿using DataAccess.Interfaces;
 using MongoDB.Driver;
 using Shared.Enteties;
-using Shared.Interfaces;
 
 namespace DataAccess;
 

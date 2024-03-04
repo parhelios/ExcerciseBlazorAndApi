@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-using Shared.DTOs;
-using Shared.Enteties;
+﻿using Shared.DTOs;
 using Shared.Interfaces;
 
 namespace Client.Services;

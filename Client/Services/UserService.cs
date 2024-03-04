@@ -1,5 +1,4 @@
 ﻿using Shared.DTOs;
-using Shared.Enteties;
 using Shared.Interfaces;
 
 namespace Client.Services;
