@@ -1,0 +1,42 @@
+﻿@page "/User"
+@using Shared.DTOs
+@using Client.Services
+@using Shared.Interfaces
+@rendermode InteractiveServer
+@inject IHttpClientFactory HttpClientFactory
+@inject IRepository<UserDto> UserService
+<h3>User</h3>
+
+<EditForm Model="NewUser" OnValidSubmit="AddUser">
+	<DataAnnotationsValidator />
+	<InputText @bind-Value="NewUser.Username"></InputText>
+	<button type="submit"></button>
+	<ValidationSummary />
+</EditForm>
+
+<Virtualize Items="@AllUsers" >
+	<p>
+		@context.Username
+	</p>
+</Virtualize>
+
+
+@code {
+
+	public UserDto NewUser { get; set; }
+
+	public List<UserDto> AllUsers { get; set; } = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		AllUsers.AddRange(await UserService.GetAllAsync());
+	}
+
+	private async Task AddUser()
+	{
+		await UserService.CreateAsync(NewUser);
+		AllUsers.Clear();
+		AllUsers.AddRange(await UserService.GetAllAsync());
+	}
+
+}

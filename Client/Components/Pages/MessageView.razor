@@ -1,0 +1,21 @@
+﻿@page "/Message"
+@using Shared.DTOs
+@using System.Net
+@rendermode InteractiveServer
+@inject IHttpClientFactory HttpClientFactory
+<h3>MessageView</h3>
+
+@code {
+	public List<MessageDto> MessageDtos { get; set; } = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		var httpClient = HttpClientFactory.CreateClient("api");
+		var response = await httpClient.GetAsync("/messages");
+		// if (response.IsSuccessStatusCode)
+		// {
+		// 	var pets = await response.Content.ReadFromJsonAsync<List<GetPetDto>>();
+		// 	Pets.AddRange(pets);
+		// }
+	}
+}

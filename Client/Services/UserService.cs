@@ -10,7 +10,7 @@ public class UserService : IRepository<UserDto>
 
 	public UserService(IHttpClientFactory factory)
 	{
-		_httpClient = factory.CreateClient("API");
+		_httpClient = factory.CreateClient("api");
 	}
 
 	public async Task<IEnumerable<UserDto>> GetAllAsync()

@@ -9,7 +9,7 @@ public class MessageService : IRepository<MessageDto>
 
 	public MessageService(IHttpClientFactory factory)
 	{
-		_httpClient = factory.CreateClient("API");
+		_httpClient = factory.CreateClient("api");
 	}
 
 

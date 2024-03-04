@@ -1,10 +1,21 @@
 using Client.Components;
+using Client.Services;
+using Shared.DTOs;
+using Shared.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddHttpClient("api", client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5199");
+});
+
+builder.Services.AddSingleton<IRepository<UserDto>, UserService>();
+builder.Services.AddSingleton<IRepository<MessageDto>, MessageService>();
 
 var app = builder.Build();
 
