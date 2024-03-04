@@ -1,5 +1,6 @@
 using Client.Components;
 using Client.Services;
+using MudBlazor.Services;
 using Shared.DTOs;
 using Shared.Interfaces;
 
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddMudServices();
+
 
 builder.Services.AddHttpClient("api", client =>
 {
