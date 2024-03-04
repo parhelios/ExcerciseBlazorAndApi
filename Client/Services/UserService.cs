@@ -1,26 +1,50 @@
-﻿using Shared.Enteties;
+﻿using Shared.DTOs;
+using Shared.Enteties;
 using Shared.Interfaces;
 
 namespace Client.Services;
 
-public class UserService : IRepository<User>
+public class UserService : IRepository<UserDto>
 {
-	public Task<IEnumerable<User>> GetAllAsync()
+
+	private readonly HttpClient _httpClient;
+
+	public UserService(IHttpClientFactory factory)
+	{
+		_httpClient = factory.CreateClient("API");
+	}
+
+	public async Task<IEnumerable<UserDto>> GetAllAsync()
+	{
+		var response = await _httpClient.GetAsync("/messages");
+
+		if (!response.IsSuccessStatusCode)
+		{
+			return Enumerable.Empty<UserDto>();
+
+		}
+		var result = await response.Content.ReadFromJsonAsync<IEnumerable<UserDto>>();
+		return result ?? Enumerable.Empty<UserDto>();
+	}
+
+	public Task<UserDto> GetByIdAsync(string id)
 	{
 		throw new NotImplementedException();
 	}
 
-	public Task<User> GetByIdAsync(string id)
+	public async Task<UserDto> CreateAsync(UserDto entity)
 	{
-		throw new NotImplementedException();
+		var response = await _httpClient.PostAsJsonAsync("/people", entity);
+
+		if (!response.IsSuccessStatusCode)
+		{
+			return null;
+		}
+
+		return entity;
 	}
 
-	public Task<User> CreateAsync(User entity)
-	{
-		throw new NotImplementedException();
-	}
-
-	public Task UpdateAsync(string id, User entity)
+	public Task UpdateAsync(string id, UserDto entity)
 	{
 		throw new NotImplementedException();
 	}

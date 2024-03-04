@@ -1,6 +1,7 @@
 using API.Extensions;
 using DataAccess;
 using DataAccess.Interfaces;
+using DataAccess.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddSingleton(new MongoDbOptions()
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<MessageService>();
 
 var app = builder.Build();
 

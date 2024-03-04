@@ -1,26 +1,51 @@
-﻿using Shared.Enteties;
+﻿using System.Text.Json;
+using Shared.DTOs;
+using Shared.Enteties;
 using Shared.Interfaces;
 
 namespace Client.Services;
 
-public class MessageService : IRepository<Message>
+public class MessageService : IRepository<MessageDto>
 {
-	public Task<IEnumerable<Message>> GetAllAsync()
+	private readonly HttpClient _httpClient;
+
+	public MessageService(IHttpClientFactory factory)
+	{
+		_httpClient = factory.CreateClient("API");
+	}
+
+
+	public async Task<IEnumerable<MessageDto>> GetAllAsync()
+	{
+		var response = await _httpClient.GetAsync("/messages");
+
+		if (!response.IsSuccessStatusCode)
+		{
+			return Enumerable.Empty<MessageDto>();
+
+		}
+		var result = await response.Content.ReadFromJsonAsync<IEnumerable<MessageDto>>();
+		return result ?? Enumerable.Empty<MessageDto>();
+	}
+
+	public Task<MessageDto> GetByIdAsync(string id)
 	{
 		throw new NotImplementedException();
 	}
 
-	public Task<Message> GetByIdAsync(string id)
+	public async Task<MessageDto> CreateAsync(MessageDto entity)
 	{
-		throw new NotImplementedException();
+		var response = await _httpClient.PostAsJsonAsync("/people", entity);
+
+		if (!response.IsSuccessStatusCode)
+		{
+			return null;
+		}
+
+		return entity;
 	}
 
-	public Task<Message> CreateAsync(Message entity)
-	{
-		throw new NotImplementedException();
-	}
-
-	public Task UpdateAsync(string id, Message entity)
+	public Task UpdateAsync(string id, MessageDto entity)
 	{
 		throw new NotImplementedException();
 	}
