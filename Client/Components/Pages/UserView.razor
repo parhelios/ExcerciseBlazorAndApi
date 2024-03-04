@@ -9,8 +9,11 @@
 
 <EditForm Model="NewUser" OnValidSubmit="AddUser">
 	<DataAnnotationsValidator />
+	<label>User Id</label>
+	<InputText @bind-Value="NewUser.Id"></InputText>
+	<label>Username</label>
 	<InputText @bind-Value="NewUser.Username"></InputText>
-	<button type="submit"></button>
+	<button type="submit"Submit></button>
 	<ValidationSummary />
 </EditForm>
 
@@ -23,7 +26,7 @@
 
 @code {
 
-	public UserDto NewUser { get; set; }
+	public UserDto NewUser { get; set; } = new UserDto("", "");
 
 	public List<UserDto> AllUsers { get; set; } = new();
 
