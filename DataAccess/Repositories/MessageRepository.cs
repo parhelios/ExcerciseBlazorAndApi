@@ -2,7 +2,7 @@
 using MongoDB.Driver;
 using Shared.Enteties;
 
-namespace DataAccess;
+namespace DataAccess.Repositories;
 
 public class MessageRepository : IMessageRepository
 {
@@ -13,7 +13,7 @@ public class MessageRepository : IMessageRepository
         var connectionString = $"mongodb://{options.Host}";
         var client = new MongoClient(connectionString);
         var database = client.GetDatabase(options.Database);
-        _collection = database.GetCollection<Message>("Messages", new MongoCollectionSettings(){ AssignIdOnInsert = true});
+        _collection = database.GetCollection<Message>("Messages", new MongoCollectionSettings() { AssignIdOnInsert = true });
     }
 
     public async Task<IEnumerable<Message>> GetAllAsync()

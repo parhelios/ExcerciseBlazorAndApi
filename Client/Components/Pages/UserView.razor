@@ -5,9 +5,13 @@
 @rendermode InteractiveServer
 @inject IHttpClientFactory HttpClientFactory
 @inject IRepository<UserDto> UserService
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
 <h3>User</h3>
 
-<EditForm Model="NewUser" OnValidSubmit="AddUser">
+@* <EditForm Model="NewUser" OnValidSubmit="AddUser">
 	<DataAnnotationsValidator />
 	<label>User Id</label>
 	<InputText @bind-Value="NewUser.Id"></InputText>
@@ -15,14 +19,27 @@
 	<InputText @bind-Value="NewUser.Username"></InputText>
 	<button type="submit"Submit></button>
 	<ValidationSummary />
-</EditForm>
+</EditForm> *@
 
-<Virtualize Items="@AllUsers" >
+@* <Virtualize Items="@AllUsers">
 	<p>
 		@context.Username
 	</p>
-</Virtualize>
+</Virtualize> *@
 
+<EditForm Model="NewUser" OnValidSubmit="AddUser">
+	<DataAnnotationsValidator />
+	<MudInputLabel>Username</MudInputLabel>
+	<MudTextField @bind-Value="NewUser.Username"></MudTextField>
+	<MudButton Variant="Variant.Filled" Color="Color.Dark" ButtonType="ButtonType.Submit">Save</MudButton>
+	<ValidationSummary />
+</EditForm>
+
+<MudList>
+	<MudVirtualize Items="@AllUsers">
+		<MudListItem>@context.Username</MudListItem>
+	</MudVirtualize>
+</MudList>
 
 @code {
 

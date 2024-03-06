@@ -1,6 +1,7 @@
 using API.Extensions;
 using DataAccess;
 using DataAccess.Interfaces;
+using DataAccess.Repositories;
 using DataAccess.Services;
 
 var builder = WebApplication.CreateBuilder(args);
