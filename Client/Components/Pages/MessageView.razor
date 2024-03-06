@@ -24,12 +24,12 @@
 
 <MudList>
 	<MudVirtualize Items="@AllMessages">
-		<MudListItem>@context.Author : @context.Text</MudListItem>
+		<MudListItem>@context.CreatedAt -- @context.Author -- @context.Text</MudListItem>
 	</MudVirtualize>
 </MudList>
 
 @code {
-	public MessageDto NewMessage { get; set; } = new("", "", "",DateTime.Now);
+	public MessageDto NewMessage { get; set; } = new("", "", "",DateTime.UtcNow);
 
 	public List<MessageDto> AllMessages { get; set; } = new();
 
@@ -38,9 +38,14 @@
 		AllMessages.AddRange(await MessageService.GetAllAsync());
 	}
 
-	private Task AddMessage()
+	private async Task AddMessage()
 	{
-		throw new NotImplementedException();
+		await MessageService.CreateAsync(NewMessage);
+		AllMessages.Clear();
+		AllMessages.AddRange(await MessageService.GetAllAsync());
+
+		NewMessage.CreatedAt = DateTime.UtcNow;
+		NewMessage.Text = "";
 	}
 
 }

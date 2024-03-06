@@ -41,6 +41,9 @@
 		await UserService.CreateAsync(NewUser);
 		AllUsers.Clear();
 		AllUsers.AddRange(await UserService.GetAllAsync());
+
+		NewUser.Username = "";
+		NewUser.Id = "";
 	}
 
 }

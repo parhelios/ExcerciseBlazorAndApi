@@ -9,14 +9,14 @@ public class UserService : IRepository<UserDto>
 
 	private readonly HttpClient _httpClient;
 
-	public List<UserDto> Users { get; set; } = new()
-	{
-		new UserDto("1", "User1"),
-		new UserDto("2", "User2"),
-		new UserDto("3", "User3"),
-		new UserDto("4", "User4"),
-		new UserDto("5", "User5"),
-	};
+	//public List<UserDto> Users { get; set; } = new()
+	//{
+	//	new UserDto("1", "User1"),
+	//	new UserDto("2", "User2"),
+	//	new UserDto("3", "User3"),
+	//	new UserDto("4", "User4"),
+	//	new UserDto("5", "User5"),
+	//};
 
 	public UserService(IHttpClientFactory factory)
 	{
@@ -25,17 +25,17 @@ public class UserService : IRepository<UserDto>
 
 	public async Task<IEnumerable<UserDto>> GetAllAsync()
 	{
-		//var response = await _httpClient.GetAsync("/users");
+		var response = await _httpClient.GetAsync("/users");
 
-		//if (!response.IsSuccessStatusCode)
-		//{
-		//	return Enumerable.Empty<UserDto>();
+		if (!response.IsSuccessStatusCode)
+		{
+			return Enumerable.Empty<UserDto>();
 
-		//}
-		//var result = await response.Content.ReadFromJsonAsync<IEnumerable<UserDto>>();
-		//return result ?? Enumerable.Empty<UserDto>();
+		}
+		var result = await response.Content.ReadFromJsonAsync<IEnumerable<UserDto>>();
+		return result ?? Enumerable.Empty<UserDto>();
 
-		return Users;
+		//return Users;
 	}
 
 	public Task<UserDto> GetByIdAsync(string id)
@@ -45,17 +45,18 @@ public class UserService : IRepository<UserDto>
 
 	public async Task<UserDto> CreateAsync(UserDto entity)
 	{
-		//var response = await _httpClient.PostAsJsonAsync("/people", entity);
+		var response = await _httpClient.PostAsJsonAsync("/people", entity);
 
-		//if (!response.IsSuccessStatusCode)
-		//{
-		//	return null;
-		//}
+		if (!response.IsSuccessStatusCode)
+		{
+			return null;
+		}
 
-		//return entity;
-		var newUser = new UserDto(entity.Id, entity.Username);
-		Users.Add(newUser);
-		return newUser;
+		return entity;
+
+		//var newUser = new UserDto(entity.Id, entity.Username);
+		//Users.Add(newUser);
+		//return newUser;
 	}
 
 	public Task UpdateAsync(string id, UserDto entity)
