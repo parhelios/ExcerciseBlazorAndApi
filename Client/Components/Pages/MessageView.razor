@@ -1,21 +1,46 @@
 ﻿@page "/Message"
 @using Shared.DTOs
 @using System.Net
+@using Client.Services
+@using Shared.Interfaces
 @rendermode InteractiveServer
 @inject IHttpClientFactory HttpClientFactory
+@inject IRepository<MessageDto> MessageService
+
 <h3>MessageView</h3>
 
+<br />
+<EditForm Model="NewMessage" OnValidSubmit="AddMessage">
+	<DataAnnotationsValidator />
+	<MudInputLabel>Id</MudInputLabel>
+	<MudTextField @bind-Value="NewMessage.Id"></MudTextField>
+	<MudInputLabel>Author</MudInputLabel>
+	<MudTextField @bind-Value="NewMessage.Author"></MudTextField>
+	<MudInputLabel>Message</MudInputLabel>
+	<MudTextField @bind-Value="NewMessage.Text"></MudTextField>
+	<MudButton Variant="Variant.Filled" Color="Color.Info" ButtonType="ButtonType.Submit">Save</MudButton>
+	<ValidationSummary />
+</EditForm>
+
+<MudList>
+	<MudVirtualize Items="@AllMessages">
+		<MudListItem>@context.Author : @context.Text</MudListItem>
+	</MudVirtualize>
+</MudList>
+
 @code {
-	public List<MessageDto> MessageDtos { get; set; } = new();
+	public MessageDto NewMessage { get; set; } = new("", "", "",DateTime.Now);
+
+	public List<MessageDto> AllMessages { get; set; } = new();
 
 	protected override async Task OnInitializedAsync()
 	{
-		var httpClient = HttpClientFactory.CreateClient("api");
-		var response = await httpClient.GetAsync("/messages");
-		// if (response.IsSuccessStatusCode)
-		// {
-		// 	var pets = await response.Content.ReadFromJsonAsync<List<GetPetDto>>();
-		// 	Pets.AddRange(pets);
-		// }
+		AllMessages.AddRange(await MessageService.GetAllAsync());
 	}
+
+	private Task AddMessage()
+	{
+		throw new NotImplementedException();
+	}
+
 }
