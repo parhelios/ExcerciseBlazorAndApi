@@ -10,6 +10,7 @@ public class UserDto
           Id = id;
           Username = username;
      }
+
      public T ToEntity<T>()
      {
           return (T)Activator.CreateInstance(typeof(T), Id, Username);

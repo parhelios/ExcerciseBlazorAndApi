@@ -1,4 +1,5 @@
 ﻿using Shared.DTOs;
+using Shared.Enteties;
 using Shared.Interfaces;
 
 namespace Client.Services;
@@ -6,6 +7,14 @@ namespace Client.Services;
 public class MessageService : IRepository<MessageDto>
 {
 	private readonly HttpClient _httpClient;
+
+	public List<Message> Messages { get; set; } = new()
+	{
+		new Message("1", "Hello", "User1", DateTime.Now),
+		new Message("2", "Hi", "User2", DateTime.Now),
+		new Message("3", "Hey", "User1", DateTime.Now),
+		new Message("4", "How are you?", "User2", DateTime.Now),
+	};
 
 	public MessageService(IHttpClientFactory factory)
 	{

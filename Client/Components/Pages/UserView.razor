@@ -1,4 +1,4 @@
-﻿@page "/User"
+﻿@page "/"
 @using Shared.DTOs
 @using Client.Services
 @using Shared.Interfaces
@@ -26,12 +26,14 @@
 		@context.Username
 	</p>
 </Virtualize> *@
-
+<br />
 <EditForm Model="NewUser" OnValidSubmit="AddUser">
 	<DataAnnotationsValidator />
+	<MudInputLabel>Id</MudInputLabel>
+	<MudTextField @bind-Value="NewUser.Id"></MudTextField>
 	<MudInputLabel>Username</MudInputLabel>
 	<MudTextField @bind-Value="NewUser.Username"></MudTextField>
-	<MudButton Variant="Variant.Filled" Color="Color.Dark" ButtonType="ButtonType.Submit">Save</MudButton>
+	<MudButton Variant="Variant.Filled" Color="Color.Info" ButtonType="ButtonType.Submit">Save</MudButton>
 	<ValidationSummary />
 </EditForm>
 
@@ -43,9 +45,9 @@
 
 @code {
 
-	public UserDto NewUser { get; set; } = new UserDto("", "");
+	public required UserDto NewUser { get; set; } = new("","");
 
-	public List<UserDto> AllUsers { get; set; } = new();
+	private List<UserDto> AllUsers { get; set; } = new();
 
 	protected override async Task OnInitializedAsync()
 	{
