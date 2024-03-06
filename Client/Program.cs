@@ -14,7 +14,7 @@ builder.Services.AddMudServices();
 
 builder.Services.AddHttpClient("messageApi", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5175");
+    client.BaseAddress = new Uri("http://localhost:5199");
 });
 
 builder.Services.AddSingleton<IRepository<UserDto>, UserService>();
