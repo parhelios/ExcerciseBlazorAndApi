@@ -6,26 +6,8 @@
 @inject IHttpClientFactory HttpClientFactory
 @inject IRepository<UserDto> UserService
 
-<MudThemeProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
 <h3>User</h3>
 
-@* <EditForm Model="NewUser" OnValidSubmit="AddUser">
-	<DataAnnotationsValidator />
-	<label>User Id</label>
-	<InputText @bind-Value="NewUser.Id"></InputText>
-	<label>Username</label>
-	<InputText @bind-Value="NewUser.Username"></InputText>
-	<button type="submit"Submit></button>
-	<ValidationSummary />
-</EditForm> *@
-
-@* <Virtualize Items="@AllUsers">
-	<p>
-		@context.Username
-	</p>
-</Virtualize> *@
 <br />
 <EditForm Model="NewUser" OnValidSubmit="AddUser">
 	<DataAnnotationsValidator />

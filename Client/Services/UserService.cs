@@ -53,9 +53,9 @@ public class UserService : IRepository<UserDto>
 		//}
 
 		//return entity;
-
-		Users.Add(entity);
-		return entity;
+		var newUser = new UserDto(entity.Id, entity.Username);
+		Users.Add(newUser);
+		return newUser;
 	}
 
 	public Task UpdateAsync(string id, UserDto entity)
