@@ -20,12 +20,12 @@ public class UserService : IRepository<UserDto>
 
 	public UserService(IHttpClientFactory factory)
 	{
-		_httpClient = factory.CreateClient("api");
+		_httpClient = factory.CreateClient("messageApi");
 	}
 
 	public async Task<IEnumerable<UserDto>> GetAllAsync()
 	{
-		var response = await _httpClient.GetAsync("/users");
+		var response = await _httpClient.GetAsync("/api/users");
 
 		if (!response.IsSuccessStatusCode)
 		{
@@ -45,7 +45,7 @@ public class UserService : IRepository<UserDto>
 
 	public async Task<UserDto> CreateAsync(UserDto entity)
 	{
-		var response = await _httpClient.PostAsJsonAsync("/people", entity);
+		var response = await _httpClient.PostAsJsonAsync("/api/users", entity);
 
 		if (!response.IsSuccessStatusCode)
 		{

@@ -33,6 +33,16 @@
 
 	protected override async Task OnInitializedAsync()
 	{
+		// AllUsers.AddRange(await UserService.GetAllAsync());
+
+		// var httpClient = HttpClientFactory.CreateClient("api");
+		// var response = await httpClient.GetAsync("/users");
+		// if (response.IsSuccessStatusCode)
+		// {
+		// 	var users = await response.Content.ReadFromJsonAsync<List<UserDto>>();
+		// 	AllUsers.AddRange(users);
+		// }
+
 		AllUsers.AddRange(await UserService.GetAllAsync());
 	}
 

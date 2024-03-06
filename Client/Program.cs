@@ -12,9 +12,9 @@ builder.Services.AddRazorComponents()
 builder.Services.AddMudServices();
 
 
-builder.Services.AddHttpClient("api", client =>
+builder.Services.AddHttpClient("messageApi", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5199");
+    client.BaseAddress = new Uri("http://localhost:5175");
 });
 
 builder.Services.AddSingleton<IRepository<UserDto>, UserService>();

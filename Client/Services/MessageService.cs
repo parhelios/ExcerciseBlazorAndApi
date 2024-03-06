@@ -18,13 +18,13 @@ public class MessageService : IRepository<MessageDto>
 
 	public MessageService(IHttpClientFactory factory)
 	{
-		_httpClient = factory.CreateClient("api");
+		_httpClient = factory.CreateClient("messageApi");
 	}
 
 
 	public async Task<IEnumerable<MessageDto>> GetAllAsync()
 	{
-		var response = await _httpClient.GetAsync("/messages");
+		var response = await _httpClient.GetAsync("/api/messages");
 
 		if (!response.IsSuccessStatusCode)
 		{
@@ -44,7 +44,7 @@ public class MessageService : IRepository<MessageDto>
 
 	public async Task<MessageDto> CreateAsync(MessageDto entity)
 	{
-		var response = await _httpClient.PostAsJsonAsync("/people", entity);
+		var response = await _httpClient.PostAsJsonAsync("/api/messages", entity);
 
 		if (!response.IsSuccessStatusCode)
 		{
