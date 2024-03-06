@@ -11,8 +11,8 @@
 <br />
 <EditForm Model="NewUser" OnValidSubmit="AddUser">
 	<DataAnnotationsValidator />
-	<MudInputLabel>Id</MudInputLabel>
-	<MudTextField @bind-Value="NewUser.Id"></MudTextField>
+@* 	<MudInputLabel>Id</MudInputLabel>
+	<MudTextField @bind-Value="NewUser.Id"></MudTextField> *@
 	<MudInputLabel>Username</MudInputLabel>
 	<MudTextField @bind-Value="NewUser.Username"></MudTextField>
 	<MudButton Variant="Variant.Filled" Color="Color.Info" ButtonType="ButtonType.Submit">Save</MudButton>
